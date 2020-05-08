@@ -179,6 +179,8 @@ use sp_runtime::{
 	DispatchError, DispatchResult, RuntimeDebug,
 };
 use sp_std::prelude::*;
+// --- darwinia ---
+use darwinia_support::traits::AsPower;
 
 mod conviction;
 mod types;

@@ -15,6 +15,7 @@ macro_rules! impl_account_data {
 		}
 	) => {
 		use darwinia_support::balance::BalanceInfo;
+		use darwinia_support::AsPower;
 
 		$(#[$attr])*
 		#[derive(Clone, Default, PartialEq, Eq, Encode, Decode, RuntimeDebug)]
@@ -35,6 +36,7 @@ macro_rules! impl_account_data {
 			fn free(&self) -> $btype {
 				self.free
 			}
+
 			fn set_free(&mut self, new_free: $btype) {
 				self.free = new_free;
 			}
@@ -84,6 +86,18 @@ macro_rules! impl_account_data {
 				frozen_balance: darwinia_support::balance::FrozenBalance<$btype>,
 			) -> $btype {
 				self.free_kton.saturating_sub(frozen_balance.frozen_for(reasons))
+			}
+		}
+
+		impl AsPower<$btype, $ring_instance> for AccountData<$btype> {
+			fn as_power_of(&self, new_free: $btype) -> u32 {
+				10 // TODO: calculate the real value0
+			}
+		}
+
+		impl AsPower<$btype, $kton_instance> for AccountData<$btype> {
+			fn as_power_of(&self, new_free: $btype) -> u32 {
+				100 // TODO: calculate the real value
 			}
 		}
 	};

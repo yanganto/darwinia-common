@@ -26,6 +26,13 @@ pub trait BalanceInfo<Balance, Module> {
 	fn usable(&self, reasons: LockReasons, frozen_balance: FrozenBalance<Balance>) -> Balance;
 }
 
+/// A currency as power
+pub trait AsPower<Balance, Module> {
+	/// The quantity used to denote time; usually just a `BlockNumber`.
+	// type Moment;  // TODO consider moment later
+	fn as_power_of(currency: Balance) -> u32; // u32, kiss!
+}
+
 /// A currency whose accounts can have liquidity restrictions.
 pub trait LockableCurrency<AccountId>: Currency<AccountId> {
 	/// The quantity used to denote time; usually just a `BlockNumber`.
