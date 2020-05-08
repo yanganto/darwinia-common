@@ -209,6 +209,7 @@ fn testnet_genesis(
 			payout_fraction: Perbill::from_percent(50),
 			..Default::default()
 		}),
+		darwinia_democracy: Some(DemocracyConfig::default()),
 		darwinia_elections_phragmen: Some(ElectionsPhragmenConfig {
 			members: endowed_accounts
 				.iter()
