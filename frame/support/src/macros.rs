@@ -90,13 +90,13 @@ macro_rules! impl_account_data {
 		}
 
 		impl AsPower<$btype, $ring_instance> for AccountData<$btype> {
-			fn as_power_of(&self, new_free: $btype) -> u32 {
+			fn as_power_of(&self) -> u32 {
 				10 // TODO: calculate the real value0
 			}
 		}
 
 		impl AsPower<$btype, $kton_instance> for AccountData<$btype> {
-			fn as_power_of(&self, new_free: $btype) -> u32 {
+			fn as_power_of(&self) -> u32 {
 				100 // TODO: calculate the real value
 			}
 		}

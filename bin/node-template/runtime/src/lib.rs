@@ -823,7 +823,7 @@ construct_runtime!(
 		Treasury: darwinia_treasury::{Module, Call, Storage, Event<T>},
 
 		// Democracy
-		Democracy: darwinia_democracy::{Module, Call, Storage, Config, Event<T>},
+		// Democracy: darwinia_democracy::{Module, Call, Storage, Config, Event<T>},
 		Scheduler: pallet_scheduler::{Module, Call, Storage, Event<T>},
 	}
 );

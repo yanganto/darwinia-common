@@ -1356,37 +1356,53 @@ where
 		Self::update_locks(who, &locks);
 	}
 
-	// TODO: for democracy
-	// // Extend a lock on the balance of `who`.
-	// // Is a no-op if lock amount is zero or `reasons` `is_none()`.
-	// fn extend_lock(id: LockIdentifier, who: &T::AccountId, amount: T::Balance, reasons: WithdrawReasons) {
-	// 	if amount.is_zero() || reasons.is_none() {
-	// 		return;
-	// 	}
-	// 	let mut new_lock = Some(BalanceLock {
-	// 		id,
-	// 		amount,
-	// 		reasons: reasons.into(),
-	// 	});
-	// 	let mut locks = Self::locks(who)
-	// 		.into_iter()
-	// 		.filter_map(|l| {
-	// 			if l.id == id {
-	// 				new_lock.take().map(|nl| BalanceLock {
-	// 					id: l.id,
-	// 					amount: l.amount.max(nl.amount),
-	// 					reasons: l.reasons | nl.reasons,
-	// 				})
-	// 			} else {
-	// 				Some(l)
-	// 			}
-	// 		})
-	// 		.collect::<Vec<_>>();
-	// 	if let Some(lock) = new_lock {
-	// 		locks.push(lock)
-	// 	}
-	// 	Self::update_locks(who, &locks[..]);
-	// }
+	// Extend a lock on the balance of `who`.
+	// Is a no-op if lock amount is zero or `reasons` `is_none()`.
+	fn extend_lock(
+		id: LockIdentifier,
+		who: &T::AccountId,
+		amount: T::Balance,
+		reasons: WithdrawReasons,
+	) {
+		if amount.is_zero() || reasons.is_none() {
+			return;
+		}
+		let mut new_lock = Some(BalanceLock {
+			id,
+			lock_for: LockFor::Common { amount },
+			lock_reasons: reasons.into(),
+		});
+		let mut locks = Self::locks(who)
+			.into_iter()
+			.filter_map(|l| {
+				if l.id == id {
+					new_lock.take().map(|nl| {
+						let orig_amount = match l.lock_for {
+							LockFor::Common { amount } => amount,
+							_ => panic!("extend_lock is for democracy and LockFro::Common"),
+						};
+						let new_amount = match nl.lock_for {
+							LockFor::Common { amount } => amount,
+							_ => panic!("extend_lock is for democracy and LockFro::Common"),
+						};
+						return BalanceLock {
+							id: l.id,
+							lock_for: LockFor::Common {
+								amount: orig_amount.max(new_amount),
+							},
+							lock_reasons: l.lock_reasons | nl.lock_reasons,
+						};
+					})
+				} else {
+					Some(l)
+				}
+			})
+			.collect::<Vec<_>>();
+		if let Some(lock) = new_lock {
+			locks.push(lock)
+		}
+		Self::update_locks(who, &locks[..]);
+	}
 
 	fn remove_lock(id: LockIdentifier, who: &T::AccountId) {
 		let mut locks = Self::locks(who);

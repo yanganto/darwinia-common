@@ -823,7 +823,7 @@ dependencies = [
 
 [[package]]
 name = "darwinia-democracy"
-version = "0.5.6"
+version = "0.5.9"
 dependencies = [
  "darwinia-balances",
  "darwinia-support",

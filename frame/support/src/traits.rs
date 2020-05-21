@@ -30,7 +30,7 @@ pub trait BalanceInfo<Balance, Module> {
 pub trait AsPower<Balance, Module> {
 	/// The quantity used to denote time; usually just a `BlockNumber`.
 	// type Moment;  // TODO consider moment later
-	fn as_power_of(currency: Balance) -> u32; // u32, kiss!
+	fn as_power_of(&self) -> u32; // u32, kiss!
 }
 
 /// A currency whose accounts can have liquidity restrictions.
@@ -51,21 +51,20 @@ pub trait LockableCurrency<AccountId>: Currency<AccountId> {
 		reasons: WithdrawReasons,
 	);
 
-	// TODO: for democracy
-	// /// Changes a balance lock (selected by `id`) so that it becomes less liquid in all
-	// /// parameters or creates a new one if it does not exist.
-	// ///
-	// /// Calling `extend_lock` on an existing lock `id` differs from `set_lock` in that it
-	// /// applies the most severe constraints of the two, while `set_lock` replaces the lock
-	// /// with the new parameters. As in, `extend_lock` will set:
-	// /// - maximum `amount`
-	// /// - bitwise mask of all `reasons`
-	// fn extend_lock(
-	// 	id: LockIdentifier,
-	// 	who: &AccountId,
-	// 	amount: Self::Balance,
-	// 	reasons: WithdrawReasons,
-	// );
+	/// Changes a balance lock (selected by `id`) so that it becomes less liquid in all
+	/// parameters or creates a new one if it does not exist.
+	///
+	/// Calling `extend_lock` on an existing lock `id` differs from `set_lock` in that it
+	/// applies the most severe constraints of the two, while `set_lock` replaces the lock
+	/// with the new parameters. As in, `extend_lock` will set:
+	/// - maximum `amount`
+	/// - bitwise mask of all `reasons`
+	fn extend_lock(
+		id: LockIdentifier,
+		who: &AccountId,
+		amount: Self::Balance,
+		reasons: WithdrawReasons,
+	);
 
 	/// Remove an existing lock.
 	fn remove_lock(id: LockIdentifier, who: &AccountId);
