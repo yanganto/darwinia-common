@@ -563,8 +563,9 @@ decl_module! {
 			PublicPropCount::put(index + 1);
 			<DepositOf<T>>::insert(index, (value, &[&who][..]));
 
-			let new_prop = (index, proposal_hash, who);
-			<PublicProps<T>>::append_or_put(&[Ref::from(&new_prop)][..]);
+			// let new_prop = (index, proposal_hash, who);
+			// <PublicProps<T>>::append_or_put(&[Ref::from(&new_prop)][..]);
+			<PublicProps<T>>::append((index, proposal_hash, who));
 
 			Self::deposit_event(RawEvent::Proposed(index, value));
 		}

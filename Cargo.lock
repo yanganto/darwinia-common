@@ -837,7 +837,7 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-runtime",
- "sp-std 2.0.0-dev",
+ "sp-std 2.0.0-alpha.7 (git+https://github.com/darwinia-network/substrate.git?tag=v2.0.0-alpha.darwinia.7)",
  "sp-storage",
 ]
 
@@ -3544,8 +3544,8 @@ dependencies = [
 
 [[package]]
 name = "pallet-scheduler"
-version = "2.0.0-dev"
-source = "git+https://github.com/darwinia-network/substrate.git?tag=v2.0.0-alpha.darwinia.6#05275e80676946d04e37f9622f10fefd58d9b1a3"
+version = "2.0.0-alpha.7"
+source = "git+https://github.com/darwinia-network/substrate.git?tag=v2.0.0-alpha.darwinia.7#83a6f1add7957160283ac5d7e627da06beb725d9"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -3553,7 +3553,7 @@ dependencies = [
  "parity-scale-codec",
  "sp-io",
  "sp-runtime",
- "sp-std 2.0.0-dev",
+ "sp-std 2.0.0-alpha.7 (git+https://github.com/darwinia-network/substrate.git?tag=v2.0.0-alpha.darwinia.7)",
 ]
 
 [[package]]

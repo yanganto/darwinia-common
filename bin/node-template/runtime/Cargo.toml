@@ -15,6 +15,7 @@ serde = { version = "1.0.106", optional = true }
 darwinia-balances = { default-features = false, path = "../../../frame/balances" }
 darwinia-balances-rpc-runtime-api = { default-features = false, path = "../../../frame/balances/rpc/runtime-api" }
 darwinia-claims = { default-features = false, path = "../../../frame/claims" }
+darwinia-democracy = { default-features = false, path = "../../../frame/democracy" }
 darwinia-elections-phragmen = { default-features = false, path = "../../../frame/elections-phragmen" }
 darwinia-eth-relay = { default-features = false, path = "../../../frame/bridge/eth/relay" }
 darwinia-eth-backing = { default-features = false, path = "../../../frame/bridge/eth/backing" }
@@ -40,6 +41,7 @@ pallet-grandpa = { default-features = false, git = "https://github.com/darwinia-
 pallet-im-online = { default-features = false, git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-alpha.darwinia.7" }
 pallet-offences = { default-features = false, git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-alpha.darwinia.7" }
 pallet-randomness-collective-flip = { default-features = false, git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-alpha.darwinia.7" }
+pallet-scheduler = { default-features = false, git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-alpha.darwinia.7" }
 pallet-session = { default-features = false, git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-alpha.darwinia.7" }
 pallet-sudo = { default-features = false, git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-alpha.darwinia.7" }
 pallet-timestamp = { default-features = false, git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-alpha.darwinia.7" }

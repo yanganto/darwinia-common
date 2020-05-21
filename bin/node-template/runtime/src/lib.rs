@@ -511,6 +511,17 @@ impl pallet_collective::Trait<CouncilCollective> for Runtime {
 	type MotionDuration = CouncilMotionDuration;
 }
 
+parameter_types! {
+	pub const TechnicalMotionDuration: BlockNumber = 5 * DAYS;
+}
+type TechnicalCollective = pallet_collective::Instance2;
+impl pallet_collective::Trait<TechnicalCollective> for Runtime {
+	type Origin = Origin;
+	type Proposal = Call;
+	type Event = Event;
+	type MotionDuration = TechnicalMotionDuration;
+}
+
 impl pallet_sudo::Trait for Runtime {
 	type Event = Event;
 	type Call = Call;
@@ -584,17 +595,6 @@ impl darwinia_staking::Trait for Runtime {
 }
 
 parameter_types! {
-	pub const MaximumWeight: Weight = 2_000_000;
-}
-
-impl pallet_scheduler::Trait for Runtime {
-	type Event = Event;
-	type Origin = Origin;
-	type Call = Call;
-	type MaximumWeight = MaximumWeight;
-}
-
-parameter_types! {
 	pub const LaunchPeriod: BlockNumber = 28 * 24 * 60 * MINUTES;
 	pub const VotingPeriod: BlockNumber = 28 * 24 * 60 * MINUTES;
 	pub const FastTrackVotingPeriod: BlockNumber = 3 * 24 * 60 * MINUTES;
@@ -619,7 +619,7 @@ impl darwinia_democracy::Trait for Runtime {
 		pallet_collective::EnsureProportionAtLeast<_1, _2, AccountId, CouncilCollective>;
 	/// A super-majority can have the next scheduled referendum be a straight majority-carries vote.
 	type ExternalMajorityOrigin =
-		pallet_collective::EnsureProportionAtLeast<_3, _4, AccountId, CouncilCollective>;
+		pallet_collective::EnsureProportionAtLeast<_3, _1, AccountId, CouncilCollective>;
 	/// A unanimous council can have the next scheduled referendum be a straight default-carries
 	/// (NTB) vote.
 	type ExternalDefaultOrigin =
@@ -642,6 +642,17 @@ impl darwinia_democracy::Trait for Runtime {
 	type PreimageByteDeposit = PreimageByteDeposit;
 	type Slash = Treasury;
 	type Scheduler = Scheduler;
+}
+
+parameter_types! {
+	pub const MaximumWeight: Weight = 2_000_000;
+}
+
+impl pallet_scheduler::Trait for Runtime {
+	type Event = Event;
+	type Origin = Origin;
+	type Call = Call;
+	type MaximumWeight = MaximumWeight;
 }
 
 parameter_types! {

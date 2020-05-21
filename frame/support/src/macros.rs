@@ -15,7 +15,7 @@ macro_rules! impl_account_data {
 		}
 	) => {
 		use darwinia_support::balance::BalanceInfo;
-		use darwinia_support::AsPower;
+		use darwinia_support::traits::AsPower;
 
 		$(#[$attr])*
 		#[derive(Clone, Default, PartialEq, Eq, Encode, Decode, RuntimeDebug)]
