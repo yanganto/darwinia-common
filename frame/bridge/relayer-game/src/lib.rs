@@ -76,9 +76,9 @@ decl_error! {
 decl_storage! {
 	trait Store for Module<T: Trait<I>, I: Instance = DefaultInstance> as DarwiniaRelayerGame {
 		// TODO: maybe one person could start multiple games, `Vec<Games>`
-		pub Games get(fn game): map hasher(blake2_128_concat) AccountId<T> => Game; Vec<Proposals>
+		// pub Games get(fn game): map hasher(blake2_128_concat) AccountId<T> => Game; Vec<Proposals>
 
-		pub Rounds get(fn round): map hasher(blake2_128_concat) GameId<T> => Round;
+		// pub Rounds get(fn round): map hasher(blake2_128_concat) GameId<T> => Round;
 
 		/// Each `TcHeaderId` is a `Proposal`
 		/// A `Proposal` can spawn many sub-proposals
@@ -110,7 +110,7 @@ decl_storage! {
 					TcBlockNumber<T, I>,
 					TcHeaderHash<T, I>
 				>,
-				hasher(blake2_128_concat) Round
+				hasher(blake2_128_concat) types::Round
 			=> T::BlockNumber;
 
 		/// The finalize blocks' header's id which is recorded in darwinia
@@ -155,13 +155,6 @@ decl_module! {
 	}
 }
 
-impl<T: Trait<I>, I: Instance> Module<T, I> {
-	/// Whether the submission window is open
-	fn proposal_is_open(at: BlockNumber<T>) -> bool {
-		Self::challenge_time()
-	}
-}
-
 #[derive(Clone, PartialEq, Encode, Decode, RuntimeDebug)]
 pub enum TcHeaderStatus {
 	/// The header has not been judged yet
@@ -183,7 +176,7 @@ impl Default for TcHeaderStatus {
 #[derive(Clone, Default, PartialEq, Encode, Decode, RuntimeDebug)]
 pub struct Game<BlockNumber, TcBlockNumber, TcHeaderHash> {
 	id: GameId<TcBlockNumber, TcHeaderHash>,
-	// TODO start_at: BlockNumber
+	start_at: BlockNumber,
 }
 
 #[derive(Clone, Default, PartialEq, Encode, Decode, RuntimeDebug)]
