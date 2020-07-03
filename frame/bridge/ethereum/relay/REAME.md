@@ -1,12 +1,11 @@
 ## Steps Into MMR Proof
 
-The sequence of mmr proof
 
 - **relay: 5**
 - **game id: 5**
 - **last confirmed on chain when game(5) started: 1**
-- R5: mmr root when node 5 comes in,
-- R4: mmr root when node 4 comes in,
+- R5: mmr root when node 5 comes in, R4: mmr root when node 4 comes in.
+- The sequence of mmr proof is from level low to level hight,  and from left to right
 
 ---
 
