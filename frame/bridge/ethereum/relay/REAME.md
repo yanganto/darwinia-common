@@ -11,7 +11,7 @@ The sequence of mmr proof
 ---
 
 1. **round 0, target 5**
-	```
+```
 			 R5
 		   /   \
 L2		  3     6
@@ -24,20 +24,20 @@ L1		1   2 4   5
 L2		  -   6
 		 / \
 L1		1*  2
-	```
+```
 
 2. **round 1, sample 4**
-	```
+```
 		  R5
 		 / \
 L2		3   -
 		   / \
 L1		  4*   5
 		proof 4 -> 5: [5, 3]   ** the proof is from L1 to L2
-	```
+```
 
 3. **round 2, sample 3**
-	```
+```
 			R4
 		   / \
 L2		  3   \
@@ -45,4 +45,4 @@ L2		  3   \
 L1		1   2*  4
 
 		proof 2 -> 4: [1, 4]   ** the proof is from L1 to L2, and from Left to Right
-	```
+```
