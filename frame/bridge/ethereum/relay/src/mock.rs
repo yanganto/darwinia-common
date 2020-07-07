@@ -12,6 +12,8 @@ use sp_runtime::{testing::Header, traits::IdentityLookup, Perbill, RuntimeDebug}
 // --- darwinia ---
 use crate::*;
 use array_bytes::hex_bytes_unchecked;
+// --- github ---
+use rlp;
 
 type AccountId = u64;
 type BlockNumber = u64;
@@ -121,8 +123,8 @@ pub fn from_file_to_eth_header_thing(path: &str) -> EthHeaderThing {
 	}
 	let eth_header_json: EthHeaderJson =
 		serde_json::from_reader(File::open(path).unwrap()).unwrap();
-	let header = EthHeader::decode(&mut &*hex_bytes_unchecked(eth_header_json.eth_header))
-		.unwrap_or_default();
+	// let header = EthHeader::decode(&mut &*hex_bytes_unchecked(eth_header_json.eth_header)).unwrap();
+	let header = rlp::decode(&hex_bytes_unchecked(eth_header_json.eth_header).to_vec()).unwrap();
 	let ethash_proof = Vec::<DoubleNodeWithMerkleProof>::decode(&mut &*hex_bytes_unchecked(
 		eth_header_json.ethash_proof,
 	))

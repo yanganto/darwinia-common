@@ -31,6 +31,7 @@ serde_json = { version = "1.0.51"}
 array-bytes = { path = "../../../../primitives/array-bytes" }
 darwinia-balances = { path = "../../../../frame/balances" }
 ethereum-primitives = { features = ["easy-testing"], path = "../../../../primitives/ethereum-primitives" }
+rlp = { default-features = false, git = "https://github.com/darwinia-network/parity-common.git" }
 # substrate
 sp-core = { git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-rc.darwinia.1" }
 sp-io = { git = "https://github.com/darwinia-network/substrate.git", tag = "v2.0.0-rc.darwinia.1" }
